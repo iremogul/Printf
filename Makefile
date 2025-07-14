@@ -6,6 +6,7 @@ CFLAGS = -Wall -Wextra -Werror
 SRCS = ft_printf.c ft_printf_functionsone.c ft_printf_functionstwo.c
 OBJS = $(SRCS:.c=.o)
 
+
 all: $(NAME)
 
 $(NAME): $(OBJS)

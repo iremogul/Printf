@@ -6,7 +6,7 @@
 /*   By: iogul <iogul@student.42kocaeli.com.tr>     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/02 17:37:51 by iogul             #+#    #+#             */
-/*   Updated: 2025/07/11 17:47:41 by iogul            ###   ########.fr       */
+/*   Updated: 2025/07/14 20:38:28 by iogul            ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,9 +36,9 @@ static int	handle_format(va_list args, char frmt, int *temp)
 	return (1);
 }
 
-int asd(const char *format, int *count, va_list args)
+int	format_parser(const char *format, int *count, va_list args)
 {
-	int i;
+	int	i;
 
 	i = 0;
 	while (format[i])
@@ -46,13 +46,13 @@ int asd(const char *format, int *count, va_list args)
 		if (format[i] == '%')
 		{
 			i++;
-			if(format[i] == '\0')
+			if (format[i] == '\0')
 				return (-1);
 			if (format[i])
 				if (handle_format(args, format[i], count) == -1)
 					return (-1);
 		}
-		else 
+		else
 		{
 			if (ft_pchr(format[i]) == -1)
 				return (-1);
@@ -72,7 +72,8 @@ int	ft_printf(const char *format, ...)
 	if (!format)
 		return (-1);
 	va_start(args, format);
-	if (asd(format, &count, args)== -1) // func ismi değişecek
+	if (format_parser(format, &count, args) == -1)
 		return (-1);
-	return (va_end(args), count);
+	va_end(args);
+	return (count);
 }
